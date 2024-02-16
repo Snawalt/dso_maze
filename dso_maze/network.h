@@ -1,5 +1,4 @@
-#ifndef network_h
-#define network_h
+#define NETWORK_H
 
 #include <iostream>
 #include <string>
@@ -19,5 +18,3 @@ private:
     std::string b_getpath(DWORD pid);
     void b_blocker(const std::string& processPath, int seconds);
 };
-
-#endif
