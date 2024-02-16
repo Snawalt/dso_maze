@@ -50,10 +50,10 @@ std::string n_blocker::b_getpath(DWORD pid) {
 }
 
 void n_blocker::b_blocker(const std::string& processPath, int seconds) {
-    std::string blockCmd = "netsh advfirewall firewall add rule name=\"BlockDso\" dir=out action=block program=\"" + processPath + "\" > nul 2>&1";
-    std::string unblockCmd = "netsh advfirewall firewall delete rule name=\"BlockDso\" program=\"" + processPath + "\" > nul 2>&1";
+    std::string b_command = "netsh advfirewall firewall add rule name=\"BlockDso\" dir=out action=block program=\"" + processPath + "\" > nul 2>&1";
+    std::string ub_command = "netsh advfirewall firewall delete rule name=\"BlockDso\" program=\"" + processPath + "\" > nul 2>&1";
 
-    if (system(blockCmd.c_str()) != 0) {
+    if (system(b_command.c_str()) != 0) {
         std::cerr << "block was failed" << std::endl;
         return;
     }
@@ -64,7 +64,7 @@ void n_blocker::b_blocker(const std::string& processPath, int seconds) {
     std::cout << "waiting.." << std::endl;
     Sleep(seconds * 1000);
 
-    if (system(unblockCmd.c_str()) != 0) {
+    if (system(ub_command.c_str()) != 0) {
         std::cerr << "unblock was failed" << std::endl;
     }
     else {
